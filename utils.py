@@ -1,6 +1,6 @@
 import json
 import os
-
+import psycopg2
 import requests
 from environs import Env
 
@@ -33,3 +33,33 @@ def save_to_json(data: dict) -> None:
             data_list.append(data)
             with open(CURRENCY_RATES_FILE, "w") as json_file:
                 json.dump(data_list, json_file)
+
+def creat_db(dataname, params):
+    # Подключаемся к базе данных
+    conn = psycopg2.connect(dbname="postgres", **params)
+    # Устанавливаем autocommit, чтобы изменения сохранялись сразу же
+    conn.autocommit = True
+    # Получаем курсор
+    cur = conn.cursor()
+    # Удаляем базу данных, если она уже существует
+    cur.execute(f'DROP DATABASE IF EXISTS {database_name};')
+    #  Создаем базу данных
+    cur.execute(f'CREATE DATABASE {database_name};')
+
+    conn.close()
+
+    with psycopg2.connect(dbname=database_name, **params) as conn:
+        with conn.cursor() as cur:
+            # удаляем таблицу companies, если она уже существует
+            cur.execute("DROP TABLE IF EXISTS companies")
+            # Создаем таблицу companies, если она не существует
+            cur.execute("CREATE TABLE companies (company_id INT PRIMARY KEY, company_name VARCHAR(255))")
+
+            # Добавляем данные из JSON файла в таблицу
+            for company_name, company_id in companies[0].items():
+                cur.execute("INSERT INTO companies (company_id, company_name) VALUES (%s, %s)",
+                            (company_id, company_name))
+
+            # Фиксируем изменения
+            conn.commit()
+
