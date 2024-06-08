@@ -4,12 +4,11 @@ from datetime import datetime
 
 from environs import Env
 
+import requests
+
+
 env = Env()  # Создаем экземпляр класса Env
 env.read_env()  # Методом read_env() читаем файл .env и загружаем из него переменные в окружение
-
-API_KEY = env('EXCHANGE_RATE_API_KEY')
-
-import requests
 
 CURRENCY_RATES_FILE = "currency_rates.json"
 API_KEY = env('EXCHANGE_RATE_API_KEY')

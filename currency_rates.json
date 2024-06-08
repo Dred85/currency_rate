@@ -1,12 +1,1 @@
-[
-  {
-    "currency": "USD",
-    "rate": 89.43841,
-    "timestamp": "2024-06-08 15:56:57"
-  },
-  {
-    "currency": "EUR",
-    "rate": 96.721113,
-    "timestamp": "2024-06-08 15:57:14"
-  }
-]
+[{"currency": "USD", "rate": 89.43841, "timestamp": "2024-06-08 15:56:57"}, {"currency": "EUR", "rate": 96.721113, "timestamp": "2024-06-08 15:57:14"}, {"currency": "USD", "rate": 89.43841, "timestamp": "2024-06-08 16:09:20"}, {"currency": "EUR", "rate": 96.721113, "timestamp": "2024-06-08 16:18:10"}, {"currency": "USD", "rate": 89.43841, "timestamp": "2024-06-08 16:19:27"}, {"currency": "EUR", "rate": 96.721113, "timestamp": "2024-06-08 16:19:42"}]
