@@ -1,7 +1,9 @@
-
 from datetime import datetime
 
-from utils import get_currency_rate, save_to_json
+from utils import get_currency_rate, save_to_json, creat_db
+from config import config
+
+params = config()
 
 
 def main():
@@ -21,6 +23,7 @@ def main():
         print(f"Курс {currency} к рублю: {rate:.2f}")
         data = {"currency": currency, "rate": rate, "timestamp": timestamp}
         save_to_json(data)
+        creat_db('currency_rate', params)
 
         choice = input("Выберите действие: (1 - продолжить, 2 - выйти) ")
         if choice == "1":
@@ -29,6 +32,8 @@ def main():
             break
         else:
             print("Некорректный ввод")
+
+
 
 
 if __name__ == "__main__":
