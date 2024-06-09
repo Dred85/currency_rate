@@ -54,9 +54,11 @@ def creat_db(database_name, params):
     with psycopg2.connect(dbname=database_name, **params) as conn:
         with conn.cursor() as cur:
             # удаляем таблицу currency_rate, если она уже существует
-            cur.execute("DROP TABLE IF EXISTS currency_rate")
-            # Создаем таблицу companies, если она не существует
-            cur.execute("CREATE TABLE currency_rate (currency VARCHAR(5), rate FLOAT, timestamp TIMESTAMP)")
+            # cur.execute("DROP TABLE IF EXISTS currency_rate")
+
+
+            # Удаляем все записи из уже созданной таблицы
+            cur.execute("TRUNCATE TABLE currency_rate")
 
             # Получаем данные из JSON файла
             with open("currency_rates.json") as json_file:
