@@ -23,7 +23,6 @@ def main():
         print(f"Курс {currency} к рублю: {rate:.2f}")
         data = {"currency": currency, "rate": rate, "timestamp": timestamp}
         save_to_json(data)
-        creat_db('currency_rate', params)
 
         choice = input("Выберите действие: (1 - продолжить, 2 - выйти) ")
         if choice == "1":
@@ -33,7 +32,7 @@ def main():
         else:
             print("Некорректный ввод")
 
-
+    creat_db("currency_rate", params)
 
 
 if __name__ == "__main__":
