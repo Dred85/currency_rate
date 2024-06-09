@@ -39,24 +39,24 @@ def save_to_json(data: dict) -> None:
 
 def creat_db(database_name, params):
     # Подключаемся к базе данных
-    conn = psycopg2.connect(dbname="postgres", **params)
+    # conn = psycopg2.connect(dbname="postgres", **params)
     # Устанавливаем autocommit, чтобы изменения сохранялись сразу же
-    conn.autocommit = True
+    # conn.autocommit = True
     # Получаем курсор
-    cur = conn.cursor()
+    # cur = conn.cursor()
     # Удаляем базу данных, если она уже существует
-    cur.execute(f'DROP DATABASE IF EXISTS {database_name};')
+    # cur.execute(f'DROP DATABASE IF EXISTS {database_name};')
     #  Создаем базу данных
-    cur.execute(f'CREATE DATABASE {database_name};')
+    # cur.execute(f'CREATE DATABASE {database_name};')
 
-    conn.close()
+    # conn.close()
 
     with psycopg2.connect(dbname=database_name, **params) as conn:
         with conn.cursor() as cur:
             # удаляем таблицу currency_rate, если она уже существует
             cur.execute("DROP TABLE IF EXISTS currency_rate")
             # Создаем таблицу companies, если она не существует
-            cur.execute("CREATE TABLE currency_rate (currency VARCHAR(5), rate FLOAT, timestamp DATE)")
+            cur.execute("CREATE TABLE currency_rate (currency VARCHAR(5), rate FLOAT, timestamp TIMESTAMP)")
 
             # Получаем данные из JSON файла
             with open("currency_rates.json") as json_file:
